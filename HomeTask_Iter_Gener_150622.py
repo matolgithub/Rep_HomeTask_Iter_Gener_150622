@@ -62,10 +62,47 @@ def simple_flatten(nested_list=nested_list_1):
     print('List comprehension:', listcompr_output(nested_list))
     return flatten_list
 
+class MyFlattenIterator:
+    def __init__(self, _list):
+        self._list = _list
+
+    def __iter__(self):
+        self.marker = -1
+        self.nested_list = []
+        self.list_iter = iter(self._list)
+        return self
+
+    def __next__(self):
+        self.marker += 1
+        if len(self.nested_list) == self.marker:
+            self.nested_list = []
+            self.marker = 0
+            while not self.nested_list:
+                self.nested_list = next(self.list_iter)
+        return self.nested_list[self.marker]
+
+class MyGenerator:
+    def __init__(self, _list):
+        self._list = _list
+
+    def flat_generator(self, _list):
+        for item_list in _list:
+            for sub_itemlist in item_list:
+                yield sub_itemlist
+
 
 if __name__ == '__main__':
+
+    print('Iterator:')
+    for list_item in MyFlattenIterator(nested_list_1):
+        print(list_item)
+
+    print('Generator:')
+    for list_item in MyGenerator.flat_generator(MyGenerator, nested_list_1):
+        print(list_item)
+
+    print('List comprehensions:')
+    print([list_item for list_item in MyFlattenIterator(nested_list_1)])
+
+    print('Iterator with deep flatten:')
     iterutil_flatten()
-    # flatten_pandas()
-    # flatten_itertools()
-    # flatten_numpy()
-    # simple_flatten()
