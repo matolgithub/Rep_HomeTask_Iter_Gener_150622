@@ -1,0 +1,4 @@
+2022-06-21-00.26.38
+iterutil_flatten
+(nested_list=[['a', 'b', 'c'], ['d', 'e', 'f', 'h', False], [1, 2, [[None, 3], [4, 5, [6, 7]]]]])
+['a', 'b', 'c', 'd', 'e', 'f', 'h', False, 1, 2, None, 3, 4, 5, 6, 7]

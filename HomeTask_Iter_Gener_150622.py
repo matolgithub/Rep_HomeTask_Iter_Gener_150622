@@ -2,6 +2,7 @@ import itertools
 import numpy
 from pandas.core.common import flatten
 from iteration_utilities import deepflatten
+from HomeTask_Decorators_200622 import file_path_maker
 
 nested_list_1 = [
 	['a', 'b', 'c'],
@@ -24,6 +25,7 @@ def listcompr_output(_list):
     return [sub_item for item in _list for sub_item in item]
 
 # variant number 1 - deep flatten
+@file_path_maker('\log')
 def iterutil_flatten(nested_list=nested_list_2):
     flatten_list = list(deepflatten(nested_list))
     flatten_output(flatten_list)
@@ -92,17 +94,18 @@ class MyGenerator:
 
 
 if __name__ == '__main__':
-
-    print('Iterator:')
-    for list_item in MyFlattenIterator(nested_list_1):
-        print(list_item)
-
-    print('Generator:')
-    for list_item in MyGenerator.flat_generator(MyGenerator, nested_list_1):
-        print(list_item)
-
-    print('List comprehensions:')
-    print([list_item for list_item in MyFlattenIterator(nested_list_1)])
-
-    print('Iterator with deep flatten:')
     iterutil_flatten()
+
+    # print('Iterator:')
+    # for list_item in MyFlattenIterator(nested_list_1):
+    #     print(list_item)
+    #
+    # print('Generator:')
+    # for list_item in MyGenerator.flat_generator(MyGenerator, nested_list_1):
+    #     print(list_item)
+    #
+    # print('List comprehensions:')
+    # print([list_item for list_item in MyFlattenIterator(nested_list_1)])
+    #
+    # print('Iterator with deep flatten:')
+    # iterutil_flatten()
